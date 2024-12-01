@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-video-player',
   imports: [],
   templateUrl: './video-player.component.html',
-  styleUrl: './video-player.component.css'
+  styleUrl: './video-player.component.scss'
 })
 export class VideoPlayerComponent {
 
