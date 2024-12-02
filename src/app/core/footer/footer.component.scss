@@ -1,0 +1,21 @@
+@use "../../../styles.scss" as *;
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem 6rem;
+    height: 6.5rem;
+    gap: 3rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+a {
+    color: $white;  
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: none;
+}

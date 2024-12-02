@@ -1,0 +1,68 @@
+@use "../../styles.scss" as *;
+
+main {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(180deg, #000 -19.89%, rgba(0, 0, 0, 0.55) 40.46%, #000 100%), url("../../assets/images/backgrounds/video-collage.jpg") lightgray -5.713px -94.592px / 117.212% 117.212% no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    > div:first-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    > div:last-child { 
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+h1 {
+    color: $white;
+    font-size: 3rem;
+}
+
+p {
+    color: $white;
+    text-align: center;
+    font-size: 1.125rem;
+    align-self: stretch;
+}
+
+input {
+    border-radius: 2.5rem;
+    border: 1px solid $white;
+    padding: 0.75rem 1.5rem;
+    width: 22.5rem;
+    color: #FFF;
+    font-size: 1.125rem;
+    background-color: transparent;
+
+    &::placeholder {
+        color: #FFF;
+        text-align: left;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    >img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

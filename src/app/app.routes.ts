@@ -6,7 +6,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { VideoListComponent } from './videos/video-list/video-list.component';
 import { VideoDetailComponent } from './videos/video-detail/video-detail.component';
-import { ImprintComponent } from './legal/imprint/imprint.component';
+import { LegalNoticeComponent } from './legal/legal-notice/legal-notice.component';
 import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'videos', component: VideoListComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
-  { path: 'imprint', component: ImprintComponent },
+  { path: 'legal-notice', component: LegalNoticeComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: '**', redirectTo: '' } // Fallback-Route
 ];
