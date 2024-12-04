@@ -28,13 +28,15 @@ main {
 h1 {
     color: $white;
     font-size: 3rem;
+    font-weight: 700;
+    line-height: normal;
 }
 
-p {
+p { 
     color: $white;
     text-align: center;
     font-size: 1.125rem;
-    align-self: stretch;
+    line-height: normal;
 }
 
 input {

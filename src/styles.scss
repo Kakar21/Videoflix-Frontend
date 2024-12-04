@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@use "./fonts.scss";
+@use "./fonts.scss" as *;
+
 $purple: #2E3EDF;
 $white: #FFFFFF;
 $black: #000000;
