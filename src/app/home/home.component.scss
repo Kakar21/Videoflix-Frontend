@@ -19,7 +19,7 @@ main {
         gap: 1.5rem;
     }
 
-    > div:last-child { 
+    > form { 
         display: flex;
         gap: 1rem;
     }
@@ -39,32 +39,47 @@ p {
     line-height: normal;
 }
 
-input {
-    border-radius: 2.5rem;
-    border: 1px solid $white;
-    padding: 0.75rem 1.5rem;
-    width: 22.5rem;
-    color: #FFF;
-    font-size: 1.125rem;
-    background-color: transparent;
+::ng-deep mat-form-field {
+    > div:first-child {
+        border-radius: 2.5rem;
+        border: 1px solid $white;
+        padding: 0 1.5rem;
+        width: 22.5rem;
+        background-color: transparent !important;
+    
 
-    &::placeholder {
-        color: #FFF;
-        text-align: left;
+    
+        &:focus {
+            outline: none;
+        }
     }
 
-    &:focus {
-        outline: none;
+    .mat-mdc-form-field-infix {
+        padding: calc(0.75rem - 1.5px) 0 !important;
+        min-height: unset !important;
+    }
+
+    input {
+        color: #FFF !important;
+        font-size: 1.125rem !important;
+
+        &::placeholder {
+            color: #FFF !important;
+        }
     }
 }
 
-button {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+::ng-deep button {
+    height: 3rem !important;
 
-    >img {
-        width: 1.5rem;
-        height: 1.5rem;
+    >.mdc-button__label {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    
+        >img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 }

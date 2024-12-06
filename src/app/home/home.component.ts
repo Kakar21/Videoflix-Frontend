@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
 
+export class HomeComponent {
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 }

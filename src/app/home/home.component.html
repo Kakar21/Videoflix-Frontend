@@ -3,8 +3,16 @@
         <h1>Movies, TV shows, and more</h1>
         <p>Enter your email to create or restart your subscription.</p>
     </div>
-    <div>
-        <input type="text" placeholder="Email address">
-        <button class="filled">Sign Up <img src="assets/images/icons/chevron_right.svg"></button>
-    </div>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email address">
+          @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        <button mat-flat-button class="filled">Sign Up <img src="assets/images/icons/chevron_right.svg"></button>
+    </form>
 </main>
