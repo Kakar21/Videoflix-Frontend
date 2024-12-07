@@ -1,19 +1,46 @@
 <main>
-    <section>
+    <form>
         <h1>Sign Up</h1>
-        <input type="email" placeholder="Email Address">
-        <div class="password">
-            <input type="password" placeholder="Enter a password">
-            <img src="assets/images/icons/visibility.svg" alt="Toggle password visibility">
-        </div>
-        <div class="password">
-            <input type="password" placeholder="Confirm password">
-            <img src="assets/images/icons/visibility.svg" alt="Toggle password visibility">
-        </div>
-        <div class="error">
+        <!-- <div class="error">
             <img src="assets/images/icons/warning.svg" alt="">
             Passwords must match.
-        </div>
-        <button class="filled">Get Started</button>
-    </section>
+        </div> -->
+        <mat-form-field class="email-field">
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email address">
+          @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="password-field">
+            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Enter a password" />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+            <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
+            </button>
+          </mat-form-field>
+          <mat-form-field class="password-field">
+            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirm password" />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+            <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
+            </button>
+          </mat-form-field>
+          <!-- TODO: Add password validation -->
+        <button type="submit" mat-flat-button class="filled">Get Started</button>
+    </form>
 </main>
