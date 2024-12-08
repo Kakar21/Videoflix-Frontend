@@ -1,4 +1,6 @@
 <main>
     <img src="assets/images/logos/videoflix.svg" alt="Logo">
-    <button mat-flat-button class="filled">Log in</button>
+    @if (router.url !== '/login') {
+        <button mat-flat-button class="filled" routerLink="/login">Log In</button>
+    }
 </main>

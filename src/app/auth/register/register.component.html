@@ -6,7 +6,7 @@
             Passwords must match.
         </div> -->
         <mat-form-field class="email-field">
-          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email address">
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email Address">
           @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
             <mat-error>Please enter a valid email address</mat-error>
           }
@@ -40,7 +40,7 @@
             <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
             </button>
           </mat-form-field>
-          <!-- TODO: Add password validation -->
-        <button type="submit" mat-flat-button class="filled">Get Started</button>
+          <!-- TODO: Add password validation + error messages -->
+        <button type="submit" mat-flat-button class="filled">Sign Up</button>
     </form>
 </main>

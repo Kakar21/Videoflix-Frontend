@@ -5,7 +5,7 @@
     </div>
     <form class="example-form">
         <mat-form-field class="example-full-width">
-          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email address">
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email Address">
           @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
             <mat-error>Please enter a valid email address</mat-error>
           }
@@ -13,6 +13,6 @@
             <mat-error>Email is <strong>required</strong></mat-error>
           }
         </mat-form-field>
-        <button mat-flat-button class="filled">Sign Up <img src="assets/images/icons/chevron_right.svg"></button>
+        <button mat-flat-button class="filled">Get Started<img src="assets/images/icons/chevron_right.svg"></button>
     </form>
 </main>
