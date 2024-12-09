@@ -6,13 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-signup',
   imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent {
+export class SignupComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   hide = signal(true);
   clickEvent(event: MouseEvent) {
