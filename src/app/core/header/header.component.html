@@ -1,6 +1,10 @@
 <main>
     <img src="assets/images/logos/videoflix.svg" alt="Logo">
-    @if (router.url !== '/login') {
+    @if (router.url === '/legal-notice' || router.url === '/privacy-policy') {
+        <button class="back-button" mat-icon-button (click)="history.back()">
+            <img src="assets/images/icons/arrow_back.svg" alt="Go Back">
+        </button>
+    } @else if (router.url !== '/login') {
         <button mat-flat-button class="filled" routerLink="/login">Log In</button>
     }
 </main>

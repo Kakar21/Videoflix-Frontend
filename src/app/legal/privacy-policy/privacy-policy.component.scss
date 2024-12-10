@@ -1,0 +1,23 @@
+@use "../../../styles.scss" as *;
+
+main {
+    min-height: calc(100vh - 9.75rem - 3rem);
+    width: calc(100% - 12rem);
+    padding: 9.75rem 6rem 3rem 6rem;
+    background: #141414;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+
+div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+}

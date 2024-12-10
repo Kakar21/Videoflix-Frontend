@@ -12,6 +12,18 @@ main {
     right: 0;
 }
 
+
 img {
     height: 2rem;
+}
+
+
+.back-button {
+    width: 4rem;
+    height: 4rem;
+
+    >img {
+        height: 3rem;
+        width: 3rem;
+    }
 }

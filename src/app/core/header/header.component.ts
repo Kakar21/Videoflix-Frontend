@@ -9,5 +9,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  history = window.history;
+
   constructor(public router: Router) {}
 }
