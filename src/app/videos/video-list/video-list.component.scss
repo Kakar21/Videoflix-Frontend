@@ -1,0 +1,71 @@
+@use "../../../styles.scss" as *;
+
+main {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #141414;
+}
+
+.video-detail {
+    aspect-ratio: 16 / 9;
+    width: calc(100% - 12rem);
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0.60) 0%, rgba(20, 20, 20, 0.00) 50%, #141414 100%), url(../../../assets/images/backgrounds/video-detail.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 6rem;
+
+    >div {
+        display: flex;
+        width: 27.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    h1 {
+        color: #FFF;
+        font-size: 5.5rem;
+    }
+
+    p {
+        align-self: stretch;
+        color: #FFF;
+    }
+}
+
+.video-list {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 0 6rem;
+    width: calc(100% - 12rem);
+
+    >div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 100%;
+
+        >div {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 1rem;
+            max-width: 100%;
+            overflow-x: auto;
+
+            img {
+                width: 13.32038rem;
+                height: 7.5rem;
+                min-width: 13.32038rem;
+                min-height: 7.5rem;
+            }
+        }
+    }
+}
+
