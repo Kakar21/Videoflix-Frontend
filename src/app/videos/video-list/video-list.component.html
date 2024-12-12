@@ -3,10 +3,16 @@
         <div>
             <h1>Breakout</h1>
             <p>In a high-security prison, a wrongly convicted man formulates a meticulous plan to break out and prove his innocence. He must navigate a web of alliances and betrayals to reclaim his freedom and expose the truth.</p>
-            <button mat-flat-button class="filled">Get Started<img src="assets/images/icons/chevron_right.svg"></button>
+            <button mat-flat-button class="filled"><img src="assets/images/icons/play_arrow.svg">Play</button>
         </div>
     </div>
     <div class="video-list">
+        <div>
+            <h2>New on Videoflix</h2>
+            <div>
+                <img *ngFor="let video of getNewVideos()" [src]="video.image" alt="{{video.title}}">
+            </div>
+        </div>
         <div *ngFor="let category of getCategories()">
             <h2>{{category.category}}</h2>
             <div>

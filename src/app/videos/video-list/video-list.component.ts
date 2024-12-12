@@ -79,6 +79,10 @@ export class VideoListComponent {
     }
   ]
 
+  getNewVideos(): Video[] {
+    return this.videoList.filter(video => video.new);
+  }
+  
   getCategories(): { category: string; videos: Video[] }[] {
     const categoryMap: { [key: string]: Video[] } = {};
 

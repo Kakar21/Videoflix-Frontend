@@ -1,8 +1,18 @@
-<main>
-    <img src="assets/images/logos/videoflix.svg" alt="Logo">
+<main [class.scrolled]="isScrolled">
+    @if (router.url !== '/videos') {
+        <img class="videoflix" src="assets/images/logos/videoflix.svg" alt="Logo">
+    } @else {
+        <img class="symbol" src="assets/images/logos/symbol.svg" alt="Logo">
+    }
+
     @if (router.url === '/legal-notice' || router.url === '/privacy-policy') {
         <button class="back-button" mat-icon-button (click)="history.back()">
             <img src="assets/images/icons/arrow_back.svg" alt="Go Back">
+        </button>
+    } @else if (router.url === '/videos') {
+        <button mat-flat-button class="filled logout">
+            <img src="assets/images/icons/logout.svg" alt="Log Out">
+            Log Out
         </button>
     } @else if (router.url !== '/login') {
         <button mat-flat-button class="filled" routerLink="/login">Log In</button>
