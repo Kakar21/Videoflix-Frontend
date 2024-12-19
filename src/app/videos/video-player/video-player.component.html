@@ -1,1 +1,31 @@
-<p>video-player works!</p>
+<main>
+  <vg-player>
+    <video #media id="singleVideo" [vgMedia]="$any(media)" preload="auto" crossorigin>
+      <source src="assets/images/backgrounds/test-video.mp4" type="video/mp4" />
+      <!-- Optional: Weitere Quellen für verschiedene Formate -->
+      <!-- <source src="assets/videos/sample.webm" type="video/webm" />
+      <source src="assets/videos/sample.ogv" type="video/ogg" /> -->
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay">
+      <div class="overlay-top">
+        <img src="assets/images/icons/arrow_back.svg" alt="Go Back">
+        <h1>Majestic whales</h1>
+        <img src="assets/images/logos/symbol.svg" alt="Logo">
+      </div>
+      <div class="overlay-bottom"></div>
+    </div>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-buffering vgFor="singleVideo"></vg-buffering>
+    <vg-controls [vgAutohide]="true" vgFor="singleVideo" [vgAutohideTime]="2">
+      <vg-play-pause></vg-play-pause>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      </vg-scrub-bar>
+      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+      <vg-mute></vg-mute>
+      <vg-volume></vg-volume>
+      <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+  </vg-player>
+</main>

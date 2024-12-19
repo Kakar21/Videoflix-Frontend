@@ -8,15 +8,13 @@ $black: #000000;
 $error: #FF002E;
 
 html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: theme-colors.$primary-palette,
-      tertiary: theme-colors.$tertiary-palette,
-    ),
-    typography: 'DM Sans, sans-serif',
-    density: 0,
-  ));
+  @include mat.theme((color: (theme-type: light,
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+      typography: 'DM Sans, sans-serif',
+      density: 0,
+    ));
 }
 
 * {
@@ -35,6 +33,7 @@ button.filled {
   height: unset;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }

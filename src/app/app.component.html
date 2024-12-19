@@ -1,3 +1,3 @@
-<app-header></app-header>
+<app-header *ngIf="!router.url.startsWith('/videos') || router.url === '/videos'"></app-header>
 <router-outlet />
-<app-footer *ngIf="router.url !== '/legal-notice' && router.url !== '/privacy-policy'"></app-footer>
+<app-footer *ngIf="shouldShowFooter()"></app-footer>

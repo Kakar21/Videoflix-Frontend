@@ -3,6 +3,7 @@ app-footer {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1000;
 }
 
 app-header {
@@ -10,4 +11,5 @@ app-header {
     top: 0;
     right: 0;
     left: 0;
+    z-index: 1000;
 }

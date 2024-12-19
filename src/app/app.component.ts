@@ -13,4 +13,14 @@ import { NgIf } from '@angular/common';
 export class AppComponent {
   title = 'videoflix-frontend';
   constructor(public router: Router) {}
+
+  shouldShowFooter(): boolean {
+    const excludedRoutes = ['/legal-notice', '/privacy-policy'];
+    const dynamicRoutePattern = /^\/videos\/.*$/; // Erlaubt alles nach "/videos/"
+  
+    return (
+      !excludedRoutes.includes(this.router.url) &&
+      !dynamicRoutePattern.test(this.router.url)
+    );
+  }
 }
