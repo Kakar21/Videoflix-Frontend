@@ -1,21 +1,20 @@
 <main>
-    <form>
+    <form (ngSubmit)="signup()" [formGroup]="signUpForm">
         <h1>Sign Up</h1>
         <!-- <div class="error">
             <img src="assets/images/icons/warning.svg" alt="">
             Passwords must match.
         </div> -->
         <mat-form-field class="email-field">
-          <input type="email" matInput [formControl]="emailFormControl" placeholder="Email Address">
-          @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
-            <mat-error>Please enter a valid email address</mat-error>
-          }
-          @if (emailFormControl.hasError('required')) {
+          <input type="email" formControlName="email" matInput placeholder="Email Address">
+          @if (signUpForm.get('email')?.hasError('required')) {
             <mat-error>Email is <strong>required</strong></mat-error>
+          } @else if (signUpForm.get('email')?.hasError('email')) {
+            <mat-error>Please enter a valid email address</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="password-field">
-            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Enter a password" />
+            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Enter a password" formControlName="password" />
             <button
               type="button"
               mat-icon-button
@@ -26,9 +25,12 @@
             >
             <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
             </button>
+            @if (signUpForm.get('password')?.hasError('required')) {
+              <mat-error>Password is <strong>required</strong></mat-error>
+            }
           </mat-form-field>
           <mat-form-field class="password-field">
-            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirm password" />
+            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirm password" formControlName="confirmPassword" />
             <button
               type="button"
               mat-icon-button
@@ -39,8 +41,13 @@
             >
             <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
             </button>
+            @if (signUpForm.get('confirmPassword')?.hasError('required')) {
+              <mat-error>Confirm password is <strong>required</strong></mat-error>
+            } @else if (signUpForm.hasError('passwordsMismatch')) {
+              <mat-error>Passwords do not match</mat-error>
+            }
           </mat-form-field>
           <!-- TODO: Add password validation + error messages -->
-        <button type="submit" mat-flat-button class="filled">Sign Up</button>
+        <button [disabled]="signUpForm.invalid" type="submit" mat-flat-button class="filled">Sign Up</button>
     </form>
 </main>
