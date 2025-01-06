@@ -9,6 +9,7 @@ import { LegalNoticeComponent } from './legal/legal-notice/legal-notice.componen
 import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
 import { NgModule } from '@angular/core';
 import { VideoPlayerComponent } from './videos/video-player/video-player.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,11 +17,11 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'videos', component: VideoListComponent },
-  { path: 'videos/:id', component: VideoPlayerComponent },
+  { path: 'videos', component: VideoListComponent, canActivate: [AuthGuard] },
+  { path: 'videos/:id', component: VideoPlayerComponent, canActivate: [AuthGuard] },
   { path: 'legal-notice', component: LegalNoticeComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: '**', redirectTo: '' } // Fallback-Route
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

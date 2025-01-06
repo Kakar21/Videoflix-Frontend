@@ -174,3 +174,18 @@ div.password {
     }
 }
 
+div.error {
+    margin-top: -1.75rem;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: $error;
+    font-size: 0.9375rem;
+    line-height: normal;
+
+    >img {
+        width: 1rem;
+        height: 1rem;
+    }
+}

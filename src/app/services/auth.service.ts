@@ -76,7 +76,7 @@ export class AuthService {
    * @returns - Promise of EmailRegisteredResponse
    */
   isEmailRegistered(email: string) {
-    const url = `${this.baseUrl}/api/auth/check-registered-email/`;
+    const url = `${this.baseUrl}/api/auth/email-check/`;
     const headers = this.getHeaders();
     const body = { email };
     return lastValueFrom(this.http.post<EmailRegisteredResponse>(url, body, { headers }));
