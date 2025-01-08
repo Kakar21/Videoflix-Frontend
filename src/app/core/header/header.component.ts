@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,5 +19,5 @@ export class HeaderComponent {
     this.isScrolled = scrollPosition > 50;
   }
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, public authService: AuthService) {}
 }

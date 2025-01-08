@@ -6,19 +6,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
 import { passwordMatchValidator } from '../../validations/passwordMatch';
+import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule, NgIf],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupComponent {
   signUpForm: FormGroup;
+  errorMessage = '';
   hide = signal(true);
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.signUpForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -29,16 +32,31 @@ export class SignupComponent {
     );
   }
 
-  signup() {
+  async signup() {
     const { email, password, confirmPassword } = this.signUpForm.value;
+
+    const response = await this.authService.isEmailRegistered(email);
+    if (response.is_registered) {
+      this.signUpForm.get('email')?.setErrors({ emailAlreadyRegistered: true });
+      return;
+    }
+
     if (password === confirmPassword) {
       this.authService
         .register(email, password)
         .then((response) => {
           console.log(response);
+          this.router.navigate(['/login']);
         })
         .catch((error) => {
           console.error(error);
+          if (error.error.email) {
+            this.errorMessage = error.error.email;
+          } else if (error.error.password) {
+            this.errorMessage = error.error.password;
+          } else {
+            this.errorMessage = 'Something went wrong. Please try again later.';
+          }
         });
     } else {
       console.error('Passwords do not match');

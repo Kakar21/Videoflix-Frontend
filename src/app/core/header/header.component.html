@@ -10,7 +10,7 @@
             <img src="assets/images/icons/arrow_back.svg" alt="Go Back">
         </button>
     } @else if (router.url === '/videos') {
-        <button mat-flat-button class="filled logout">
+        <button mat-flat-button class="filled logout" (click)="authService.logout()">
             <img src="assets/images/icons/logout.svg" alt="Log Out">
             Log Out
         </button>

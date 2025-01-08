@@ -64,7 +64,7 @@ export class AuthService {
    * @returns - Promise of response
    */
   requestPasswordReset(email: string) {
-    const url = `${this.baseUrl}/api/auth/request-reset-email/`;
+    const url = `${this.baseUrl}/api/auth/password-reset/request/`;
     const headers = this.getHeaders();
     const body = { email };
     return lastValueFrom(this.http.post(url, body, { headers }));

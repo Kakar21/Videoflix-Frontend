@@ -37,11 +37,11 @@ export class LoginComponent {
 
     try {
       const response = await this.authService.login(email, password);
-      localStorage.setItem('authToken', response.access);
-      this.router.navigate(['/']);
+      localStorage.setItem('authToken', response.access_token);
+      this.router.navigate(['/videos']);
     } catch (error: any) {
       if (error.error?.detail) {
-        this.errorMessage = 'Invalid email or password. Please try again.';
+        this.errorMessage = error.error.detail;
       } else {
         this.errorMessage = 'Something went wrong. Please try again later.';
       }

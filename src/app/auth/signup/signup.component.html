@@ -1,16 +1,14 @@
 <main>
     <form (ngSubmit)="signup()" [formGroup]="signUpForm">
         <h1>Sign Up</h1>
-        <!-- <div class="error">
-            <img src="assets/images/icons/warning.svg" alt="">
-            Passwords must match.
-        </div> -->
         <mat-form-field class="email-field">
           <input type="email" formControlName="email" matInput placeholder="Email Address">
           @if (signUpForm.get('email')?.hasError('required')) {
             <mat-error>Email is <strong>required</strong></mat-error>
           } @else if (signUpForm.get('email')?.hasError('email')) {
             <mat-error>Please enter a valid email address</mat-error>
+          } @else if (signUpForm.get('email')?.hasError('emailAlreadyRegistered')) {
+            <mat-error>Email already registered</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="password-field">
@@ -47,6 +45,10 @@
               <mat-error>Passwords do not match</mat-error>
             }
           </mat-form-field>
+          <div *ngIf="errorMessage" class="error">
+            <img src="assets/images/icons/warning.svg" alt="">
+            {{ errorMessage }}
+          </div>
           <!-- TODO: add backend error messages -->
         <button [disabled]="signUpForm.invalid" type="submit" mat-flat-button class="filled">Sign Up</button>
     </form>

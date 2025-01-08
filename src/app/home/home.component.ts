@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,4 +14,6 @@ import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 
 export class HomeComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  constructor(public router: Router) {}
 }
