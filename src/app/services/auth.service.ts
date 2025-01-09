@@ -52,9 +52,9 @@ export class AuthService {
    * @returns - Promise of response
    */
   resetPassword(password: string, uidb64: string | null, token: string | null) {
-    const url = `${this.baseUrl}/api/auth/password-reset-complete/`;
+    const url = `${this.baseUrl}/api/auth/password-reset/confirm/${uidb64}/${token}/`;
     const headers = this.getHeaders();
-    const body = { password, uidb64: uidb64 || '', token: token || '' };
+    const body = { password };
     return lastValueFrom(this.http.patch(url, body, { headers }));
   }
 

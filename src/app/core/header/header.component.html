@@ -1,6 +1,6 @@
 <main [class.scrolled]="isScrolled">
     @if (router.url !== '/videos') {
-        <img class="videoflix" src="assets/images/logos/videoflix.svg" alt="Logo">
+        <img class="videoflix" src="assets/images/logos/videoflix.svg" (click)="router.navigate(['/'])" alt="Logo" style="cursor: pointer;">
     } @else {
         <img class="symbol" src="assets/images/logos/symbol.svg" alt="Logo">
     }

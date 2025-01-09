@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password/:uidb64/:token', component: ResetPasswordComponent },
   { path: 'videos', component: VideoListComponent, canActivate: [AuthGuard] },
   { path: 'videos/:id', component: VideoPlayerComponent, canActivate: [AuthGuard] },
   { path: 'legal-notice', component: LegalNoticeComponent },
