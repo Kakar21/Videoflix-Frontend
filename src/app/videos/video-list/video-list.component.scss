@@ -7,9 +7,10 @@ main {
 }
 
 .video-detail {
+    --bg-image: url(../../../assets/images/backgrounds/video-detail.jpg);
     aspect-ratio: 16 / 9;
     width: calc(100% - 12rem);
-    background: linear-gradient(180deg, rgba(20, 20, 20, 0.60) 0%, rgba(20, 20, 20, 0.00) 50%, #141414 100%), url(../../../assets/images/backgrounds/video-detail.jpg);
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0.60) 0%, rgba(20, 20, 20, 0.00) 50%, #141414 100%), var(--bg-image);
     background-size: cover;
     display: flex;
     flex-direction: column;
