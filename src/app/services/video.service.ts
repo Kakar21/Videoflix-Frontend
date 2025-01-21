@@ -7,18 +7,18 @@ import { VideoData } from '../models/video-data';
   providedIn: 'root'
 })
 export class VideoService {
-  private apiBase = 'http://127.0.0.1:8000/';
+  private apiBase = 'http://127.0.0.1:8000';
   private http = inject(HttpClient);
   videosAvailable: boolean = true;
   currentVideo: VideoData = {
     id: 1,
     title: '',
     description: '',
-    category: '',
-    isNew: false,
+    video_file: '',
     thumbnail: '',
-    videoUrl: '',
-    preview: ''
+    category: '',
+    created_at: '',
+    new: false,
   };
 
   /**
@@ -47,6 +47,17 @@ export class VideoService {
   fetchVideos() {
     const token = localStorage.getItem('authToken');
     const url = `${this.apiBase}/api/videos/videos/`;
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return lastValueFrom(this.http.get(url, { headers }));
+  }
+
+    /**
+   * Fetches a specific video by its title from the backend.
+   * @param path - The title of the video.
+   */
+  fetchVideoByPath(path: string) {
+    const token = localStorage.getItem('authToken');
+    const url = `${this.apiBase}/api/videos/videos/${encodeURIComponent(path)}.mp4/`;
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return lastValueFrom(this.http.get(url, { headers }));
   }

@@ -2,10 +2,10 @@ export interface VideoData {
     id: number;
     title: string;
     description: string;
-    category: string;
-    isNew: boolean;
+    video_file: string;
     thumbnail: string;
-    videoUrl: string;
-    preview: string;
+    category: string;
+    created_at: string;
+    new: boolean;
   }
   
