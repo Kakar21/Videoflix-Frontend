@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { VgCoreModule, VgMediaElement } from '@videogular/ngx-videogular/core';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
@@ -23,47 +23,65 @@ import { VideoData } from '../../models/video-data';
 export class VideoPlayerComponent implements OnInit {
   // @ViewChild(VgMediaElement, { static: true }) mediaElement!: VgMediaElement;  
   @ViewChild('media', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
-  videoPath: string | null = null;
+  videoId: string | null = null;
   currentVideo: VideoData = {
     id: 1,
     title: '',
     description: '',
-    video_file: '',
+    video_120p: '',
+    video_360p: '',
+    video_720p: '',
+    video_1080p: '',
     thumbnail: '',
     category: '',
     created_at: '',
     new: false,
   };
 
-  constructor(private route: ActivatedRoute, public videoService: VideoService) {}
+  selectedQuality: keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'> = 'video_720p'; 
+  constructor(private route: ActivatedRoute, public videoService: VideoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.videoPath = this.route.snapshot.paramMap.get('path');
-    this.route.paramMap.subscribe(params => {
-      this.videoPath = params.get('path');
-    });
-
-    if (this.videoPath) {
-      this.loadVideo(this.videoPath);
+    this.videoId = this.route.snapshot.paramMap.get('id');
+    if (this.videoId) {
+      this.loadVideo(this.videoId);
     }
   }
 
-  // playVideo(): void {
-  //   this.mediaElement.play();
-  // }
-
   /**
-   * Fetches video details based on the title from the URL.
+   * Fetches video details from the backend using the path.
    */
-  loadVideo(path: string) {
-    this.videoService.fetchVideoByPath(path)
+  loadVideo(id: string) {
+    this.videoService.fetchVideoById(id)
       .then((videoData) => {
         this.currentVideo = videoData as VideoData;
-        this.videoElement.nativeElement.src = this.currentVideo.video_file;
-        this.videoElement.nativeElement.load();
+        this.updateVideoSource();
+        console.log(this.currentVideo);
       })
       .catch(() => {
         console.error('Video not found');
       });
+  }
+
+  /**
+   * Aktualisiert die Videoquelle, wenn der Nutzer die Qualität wechselt.
+   */
+    updateVideoSource() {
+      if (this.videoElement && this.videoElement.nativeElement) {
+        this.videoElement.nativeElement.src = this.currentVideo[this.selectedQuality as keyof VideoData] as string;
+        this.videoElement.nativeElement.load();
+      }
+    }
+
+    /**
+   * Ändert die Videoqualität.
+   */
+    changeQuality(event: Event) {
+      this.selectedQuality = (event.target as HTMLSelectElement).value as keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'>;
+      this.updateVideoSource();
+    }
+
+  goBack() {
+    this.router.navigate(['/videos']);
   }
 }

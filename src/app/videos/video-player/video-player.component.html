@@ -1,15 +1,12 @@
 <main>
   <vg-player>
     <video #media id="singleVideo" [vgMedia]="$any(media)" preload="auto" crossorigin>
-      <source [src]="currentVideo.video_file" type="video/mp4" />
-      <!-- Optional: Weitere Quellen für verschiedene Formate -->
-      <!-- <source src="assets/videos/sample.webm" type="video/webm" />
-      <source src="assets/videos/sample.ogv" type="video/ogg" /> -->
+      <source [src]="currentVideo[selectedQuality]" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div class="overlay">
       <div class="overlay-top">
-        <img src="assets/images/icons/arrow_back.svg" alt="Go Back">
+        <img (click)="goBack()" src="assets/images/icons/arrow_back.svg" alt="Go Back">
         <h1>{{ currentVideo.title }}</h1>
         <img src="assets/images/logos/symbol.svg" alt="Logo">
       </div>
@@ -25,6 +22,12 @@
       <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
       <vg-mute></vg-mute>
       <vg-volume></vg-volume>
+      <select (change)="changeQuality($event)">
+        <option value="video_120p">120p</option>
+        <option value="video_360p">360p</option>
+        <option value="video_720p" selected>720p</option>
+        <option value="video_1080p">1080p</option>
+      </select>
       <vg-fullscreen></vg-fullscreen>
     </vg-controls>
   </vg-player>

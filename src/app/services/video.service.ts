@@ -14,7 +14,6 @@ export class VideoService {
     id: 1,
     title: '',
     description: '',
-    video_file: '',
     thumbnail: '',
     category: '',
     created_at: '',
@@ -55,9 +54,9 @@ export class VideoService {
    * Fetches a specific video by its title from the backend.
    * @param path - The title of the video.
    */
-  fetchVideoByPath(path: string) {
+  fetchVideoById(id: string) {
     const token = localStorage.getItem('authToken');
-    const url = `${this.apiBase}/api/videos/videos/${encodeURIComponent(path)}.mp4/`;
+    const url = `${this.apiBase}/api/videos/videos/${id}/`;
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return lastValueFrom(this.http.get(url, { headers }));
   }

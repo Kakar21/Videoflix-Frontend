@@ -134,7 +134,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
       category: item.category,
       new: item.new || false,
       thumbnail: item.thumbnail,
-      video_file: `${this.baseUrl}/media/videos/${item.id}/master.m3u8`,
+      // video_file: `${this.baseUrl}/media/videos/${item.id}/master.m3u8`,
       created_at: item.created_at,
     };
   }
