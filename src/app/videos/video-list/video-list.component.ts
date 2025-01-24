@@ -20,17 +20,17 @@ export class VideoListComponent implements OnInit, OnDestroy {
   scrollDistance: number = 720;
   baseUrl = 'http://127.0.0.1:8000/';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   selectVideo(video: VideoData) {
     this.cs.currentVideo = video;
     const videoDetail = document.querySelector('.video-detail') as HTMLElement;
 
     if (videoDetail) {
-    videoDetail.style.setProperty('--bg-image', `url(${video.thumbnail})`);
+      videoDetail.style.setProperty('--bg-image', `url(${video.thumbnail})`);
     }
 
-        // this.scrollToPreview();
+    // this.scrollToPreview();
   }
 
   ngOnInit() {
@@ -146,7 +146,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
     const newVideos = this.videoCollections.find(c => c.categoryName === 'New on Videoflix')?.videos;
     if (newVideos && newVideos.length) {
       this.cs.currentVideo = newVideos[Math.floor(Math.random() * newVideos.length)];
-    } else { 
+    } else {
       this.displayNoVideosMessage();
     }
   }
@@ -165,5 +165,15 @@ export class VideoListComponent implements OnInit, OnDestroy {
   logout() {
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
+  }
+
+  playVideo(video: VideoData) {
+    this.router.navigate(['/videos', video.id]);
+  }
+
+  getNewVideos(): VideoData[] {
+    return this.videoCollections
+      .flatMap(category => category.videos)
+      .filter(video => video.new);
   }
 }

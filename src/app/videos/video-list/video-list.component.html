@@ -3,20 +3,18 @@
         <div>
             <h1>{{ cs.currentVideo.title }}</h1>
             <p>{{ cs.currentVideo.description }}</p>
-            <button mat-flat-button class="filled"><img src="assets/images/icons/play_arrow.svg">Play</button>
+            <button (click)="playVideo(cs.currentVideo)" mat-flat-button class="filled"><img src="assets/images/icons/play_arrow.svg">Play</button>
         </div>
     </div>
 
     <div class="video-list">
-@for (category of videoCollections; track $index) {
-    @if (category.categoryName === 'New on Videoflix' && category.videos.length > 0) {
+@if ((getNewVideos().length > 0)) {
+    <div>
+        <h2>New on Videoflix</h2>
         <div>
-            <h2>New on Videoflix</h2>
-            <div>
-                <img *ngFor="let video of category.videos" [src]="video.thumbnail" alt="{{video.title}}">
-            </div>
+            <img *ngFor="let video of getNewVideos()" (click)="selectVideo(video)" [src]="video.thumbnail" alt="{{video.title}}">
         </div>
-    }
+    </div>
 }
 @for (category of videoCollections; track $index) { 
     @if (category.videos.length > 0) {

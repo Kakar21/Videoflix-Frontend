@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { VgCoreModule, VgMediaElement } from '@videogular/ngx-videogular/core';
@@ -37,9 +37,12 @@ export class VideoPlayerComponent implements OnInit {
     created_at: '',
     new: false,
   };
+  progress: number = 0;
+  lastPosition: number = 0;
+  isMetadataLoaded: boolean = false; // Flag für geladenes Video
 
-  selectedQuality: keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'> = 'video_720p'; 
-  constructor(private route: ActivatedRoute, public videoService: VideoService, private router: Router) {}
+  selectedQuality: keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'> = 'video_720p';
+  constructor(private route: ActivatedRoute, public videoService: VideoService, private router: Router) { }
 
   ngOnInit(): void {
     this.videoId = this.route.snapshot.paramMap.get('id');
@@ -49,37 +52,86 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   /**
-   * Fetches video details from the backend using the path.
+   * Holt die Videodaten und setzt die letzte geschaut Position
    */
   loadVideo(id: string) {
     this.videoService.fetchVideoById(id)
       .then((videoData) => {
         this.currentVideo = videoData as VideoData;
         this.updateVideoSource();
-        console.log(this.currentVideo);
+
+        // Prüfe, ob es eine gespeicherte Position gibt
+        this.videoService.getOngoingVideos().then((ongoingVideos: any) => {
+          const ongoingVideo = ongoingVideos.find((v: any) => v.video.id === Number(id));
+          if (ongoingVideo) {
+            this.lastPosition = ongoingVideo.last_position;
+            console.log(`Setze letzte Position auf: ${this.lastPosition}`);
+          }
+        });
       })
       .catch(() => {
         console.error('Video not found');
       });
   }
 
-  /**
-   * Aktualisiert die Videoquelle, wenn der Nutzer die Qualität wechselt.
-   */
-    updateVideoSource() {
-      if (this.videoElement && this.videoElement.nativeElement) {
-        this.videoElement.nativeElement.src = this.currentVideo[this.selectedQuality as keyof VideoData] as string;
-        this.videoElement.nativeElement.load();
-      }
-    }
+  updateVideoSource() {
+    if (this.videoElement && this.videoElement.nativeElement && this.currentVideo) {
+      this.videoElement.nativeElement.src = this.currentVideo[this.selectedQuality] as string;
+      this.videoElement.nativeElement.load();
 
-    /**
-   * Ändert die Videoqualität.
-   */
-    changeQuality(event: Event) {
-      this.selectedQuality = (event.target as HTMLSelectElement).value as keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'>;
-      this.updateVideoSource();
+      // 🛑 Neu hinzugefügt: Flag zurücksetzen, weil wir das Video neu laden
+      this.isMetadataLoaded = false;
+
+      // ✅ Erst wenn das Video geladen ist, setzen wir die Position!
+      this.videoElement.nativeElement.onloadedmetadata = () => {
+        this.isMetadataLoaded = true;
+        if (this.lastPosition > 0) {
+          this.setVideoProgress();
+        }
+      };
+
+      // 🛑 Neu hinzugefügt: Fortschritt alle 5 Sekunden speichern
+      this.videoElement.nativeElement.ontimeupdate = () => {
+        this.progress = (this.videoElement.nativeElement.currentTime / this.videoElement.nativeElement.duration) * 100;
+        if (Math.floor(this.videoElement.nativeElement.currentTime) % 5 === 0) {
+          this.saveProgress();
+        }
+      };
     }
+  }
+
+
+  setVideoProgress() {
+    if (this.videoElement && this.videoElement.nativeElement && this.isMetadataLoaded) {
+      console.log(`Setze Video-Progress auf ${this.lastPosition} Sekunden`);
+      this.videoElement.nativeElement.currentTime = this.lastPosition;
+    }
+  }
+
+
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload() {
+    this.saveProgress();
+  }
+
+
+  /**
+* Speichert den Fortschritt des Videos
+*/
+  saveProgress() {
+    if (this.videoElement && this.videoElement.nativeElement && this.videoId) {
+      const currentTime = this.videoElement.nativeElement.currentTime;
+      this.videoService.saveVideoProgress(Number(this.videoId), currentTime);
+    }
+  }
+
+  /**
+ * Ändert die Videoqualität.
+ */
+  changeQuality(event: Event) {
+    this.selectedQuality = (event.target as HTMLSelectElement).value as keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'>;
+    this.updateVideoSource();
+  }
 
   goBack() {
     this.router.navigate(['/videos']);
