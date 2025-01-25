@@ -51,14 +51,10 @@ export class VideoPlayerComponent implements OnInit {
     }
   }
 
-  /**
-   * Holt die Videodaten und setzt die letzte geschaut Position
-   */
   loadVideo(id: string) {
     this.videoService.fetchVideoById(id)
       .then((videoData) => {
         this.currentVideo = videoData as VideoData;
-        this.updateVideoSource();
 
         // Prüfe, ob es eine gespeicherte Position gibt
         this.videoService.getOngoingVideos().then((ongoingVideos: any) => {
@@ -67,6 +63,9 @@ export class VideoPlayerComponent implements OnInit {
             this.lastPosition = ongoingVideo.last_position;
             console.log(`Setze letzte Position auf: ${this.lastPosition}`);
           }
+
+          // 🛠 Jetzt erst Video starten
+          this.updateVideoSource();
         });
       })
       .catch(() => {
@@ -74,31 +73,43 @@ export class VideoPlayerComponent implements OnInit {
       });
   }
 
+
   updateVideoSource() {
     if (this.videoElement && this.videoElement.nativeElement && this.currentVideo) {
       this.videoElement.nativeElement.src = this.currentVideo[this.selectedQuality] as string;
       this.videoElement.nativeElement.load();
-
+  
       // 🛑 Neu hinzugefügt: Flag zurücksetzen, weil wir das Video neu laden
       this.isMetadataLoaded = false;
-
+  
       // ✅ Erst wenn das Video geladen ist, setzen wir die Position!
       this.videoElement.nativeElement.onloadedmetadata = () => {
+        console.log('✅ Metadata loaded. Setting last position...');
+  
         this.isMetadataLoaded = true;
-        if (this.lastPosition > 0) {
-          this.setVideoProgress();
-        }
+  
+        // **NEU: 100ms Delay für sicheres Laden**
+        setTimeout(() => {
+          if (this.lastPosition > 0) {
+            console.log(`⏩ Setze Video-Progress auf ${this.lastPosition} Sekunden.`);
+            this.setVideoProgress();
+          }
+        }, 100);
       };
-
+  
       // 🛑 Neu hinzugefügt: Fortschritt alle 5 Sekunden speichern
       this.videoElement.nativeElement.ontimeupdate = () => {
-        this.progress = (this.videoElement.nativeElement.currentTime / this.videoElement.nativeElement.duration) * 100;
-        if (Math.floor(this.videoElement.nativeElement.currentTime) % 5 === 0) {
-          this.saveProgress();
+        if (this.videoElement.nativeElement.duration) {
+          this.progress = (this.videoElement.nativeElement.currentTime / this.videoElement.nativeElement.duration) * 100;
+          
+          if (Math.floor(this.videoElement.nativeElement.currentTime) % 5 === 0) {
+            this.saveProgress();
+          }
         }
       };
     }
   }
+  
 
 
   setVideoProgress() {
