@@ -18,7 +18,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
   videoCollections: VideoCollection[] = [];
   selectedVideoId: number = 0;
   scrollDistance: number = 720;
-  baseUrl = 'http://127.0.0.1:8000/';
+  baseUrl = 'http://127.0.0.1:8000';
 
   constructor(private router: Router) { }
 

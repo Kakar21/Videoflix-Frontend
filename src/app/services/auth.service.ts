@@ -16,7 +16,7 @@ export class AuthService {
    * Base URL for API endpoints
    */
   // private baseUrl = 'https://videoflix-backend.kakar.dev';
-  private baseUrl = 'http://127.0.0.1:8000/';
+  private baseUrl = 'http://127.0.0.1:8000';
 
   /**
    * Function to log in a user
