@@ -117,7 +117,11 @@ export class VideoListComponent implements OnInit, OnDestroy {
    */
   private sortOngoingVideos(data: any, categoryMap: any, collections: VideoCollection[]) {
     data.forEach((item: any) => {
-      const video = this.mapVideoData(item.video);
+      const video = this.mapVideoData({ 
+        ...item.video, 
+        thumbnail: `${this.baseUrl}${item.video.thumbnail}`,
+        new: false
+      });
       const collection = collections.find(c => c.categoryName === categoryMap['started']);
       if (collection) collection.videos.push(video);
     });
@@ -143,9 +147,10 @@ export class VideoListComponent implements OnInit, OnDestroy {
    * Selects a random video from the "New on Videoflix" category.
    */
   private selectRandomVideo() {
-    const newVideos = this.videoCollections.find(c => c.categoryName === 'New on Videoflix')?.videos;
-    if (newVideos && newVideos.length) {
-      this.cs.currentVideo = newVideos[Math.floor(Math.random() * newVideos.length)];
+    const allVideos = this.videoCollections.flatMap(c => c.videos);
+    
+    if (allVideos.length > 0) {
+      this.selectVideo(allVideos[Math.floor(Math.random() * allVideos.length)]);
     } else {
       this.displayNoVideosMessage();
     }
