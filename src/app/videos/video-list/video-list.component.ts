@@ -30,6 +30,10 @@ export class VideoListComponent implements OnInit, OnDestroy {
       videoDetail.style.setProperty('--bg-image', `url(${video.thumbnail})`);
     }
 
+    if (window.matchMedia('(max-width: 390px)').matches) {
+      this.playVideo(video);
+    }
+
     // this.scrollToPreview();
   }
 
@@ -117,8 +121,8 @@ export class VideoListComponent implements OnInit, OnDestroy {
    */
   private sortOngoingVideos(data: any, categoryMap: any, collections: VideoCollection[]) {
     data.forEach((item: any) => {
-      const video = this.mapVideoData({ 
-        ...item.video, 
+      const video = this.mapVideoData({
+        ...item.video,
         thumbnail: `${this.baseUrl}${item.video.thumbnail}`,
         new: false
       });
@@ -148,9 +152,16 @@ export class VideoListComponent implements OnInit, OnDestroy {
    */
   private selectRandomVideo() {
     const allVideos = this.videoCollections.flatMap(c => c.videos);
-    
+
     if (allVideos.length > 0) {
-      this.selectVideo(allVideos[Math.floor(Math.random() * allVideos.length)]);
+      const randomVideo = allVideos[Math.floor(Math.random() * allVideos.length)];
+      // Setze nur den aktuellen Video-Hintergrund, ohne playVideo aufzurufen
+      this.cs.currentVideo = randomVideo;
+      const videoDetail = document.querySelector('.video-detail') as HTMLElement;
+
+      if (videoDetail) {
+        videoDetail.style.setProperty('--bg-image', `url(${randomVideo.thumbnail})`);
+      }
     } else {
       this.displayNoVideosMessage();
     }

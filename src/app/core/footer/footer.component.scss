@@ -21,3 +21,8 @@ a {
     text-decoration: none;
 }
 
+@media (max-width: 390px) {
+    main {
+        padding: 0.625rem 1rem;
+    }
+}

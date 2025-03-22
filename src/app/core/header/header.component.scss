@@ -51,3 +51,17 @@ main.scrolled::before {
     align-items: center;
     gap: 0.25rem;
 }
+
+@media (max-width: 390px) {
+    .videoflix {
+        content: url('../../../assets/images/logos/symbol.svg');
+    }
+
+    main {
+        padding: 0.625rem 1rem;
+    }
+
+    .symbol {
+        height: 2rem;
+    }
+}

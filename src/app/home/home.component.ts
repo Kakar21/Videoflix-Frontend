@@ -15,5 +15,5 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 }

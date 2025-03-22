@@ -120,3 +120,27 @@ div.error {
         height: 1rem;
     }
 }
+
+@media (max-width: 390px) {
+    form {
+        width: calc(22.375rem - 1.5rem - 1.5rem);
+        padding: 2.6875rem 1.5rem;
+        gap: 1.5rem;
+
+        > ::ng-deep mat-form-field:nth-child(2) {
+            margin-top: 0.5rem;
+        }
+
+        > ::ng-deep mat-form-field:nth-child(4) {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    ::ng-deep .email-field input::placeholder, ::ng-deep .password-field input::placeholder {
+        font-size: 1rem !important;
+    }
+}

@@ -91,56 +91,6 @@ div.password {
     }
 }
 
-
-::ng-deep mat-checkbox {
-    margin-top: -1rem !important;
-    align-self: flex-start;
-    width: 100%;
-
-    >div {
-        width: 100%;
-    }
-
-    label {
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    .mdc-checkbox {
-        display: flex;
-        width: 1rem;
-        height: 1rem;
-        padding: 0.5rem;
-        flex: none;
-    }
-
-    .mat-mdc-checkbox-touch-target, input {
-        width: 2rem !important;
-        height: 2rem !important;
-    }
-
-    .mdc-checkbox__background {
-        border: 1px solid $purple;
-        width: 1rem;
-        height: 1rem;
-        border-radius: 0.25rem;
-        top: auto;
-        right: auto;
-        bottom: auto;
-        left: auto;
-
-        >svg {
-            width: 0.75rem;
-            height: 0.75rem;
-            left: auto;
-            top: auto;
-            right: auto;
-            bottom: auto;
-        }
-    }
-}
-
-
 .links-buttons {
     align-self: stretch;
     display: flex;
@@ -187,5 +137,29 @@ div.error {
     >img {
         width: 1rem;
         height: 1rem;
+    }
+}
+
+@media (max-width: 390px) {
+    form {
+        width: calc(22.375rem - 1.5rem - 1.5rem);
+        padding: 2.6875rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    ::ng-deep .email-field > div:first-child {
+        margin-top: 0.5rem;
+    }
+
+    ::ng-deep .password-field > div:first-child {
+        margin-bottom: 0.5rem;
+    }
+
+    ::ng-deep .email-field input::placeholder, ::ng-deep .password-field input::placeholder {
+        font-size: 1rem !important;
     }
 }

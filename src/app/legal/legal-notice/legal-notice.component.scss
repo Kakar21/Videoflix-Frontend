@@ -3,7 +3,7 @@
 main {
     min-height: calc(100vh - 9.75rem);
     width: calc(100% - 12rem);
-    padding: 9.75rem 6rem 0 6rem;
+    padding: 9.75rem 6rem 6rem 6rem;
     background: #141414;
     color: $white;
     display: flex;
@@ -20,4 +20,20 @@ div {
 
 h2 {
     font-size: 2rem;
+}
+
+::ng-deep main::before {
+    background: linear-gradient(180deg, rgba(20, 20, 20, 1) 75%, rgba(20, 20, 20, 0.00) 100%) !important;
+}
+
+
+@media (max-width: 390px) {
+    ::ng-deep .videoflix {
+        content: url('../../../assets/images/logos/videoflix.svg') !important;
+    }
+
+    main {
+        padding: 9.25rem 1rem 1rem 1rem;
+        width: calc(100% - 2rem);
+    }
 }

@@ -32,6 +32,14 @@ h1 {
     line-height: normal;
 }
 
+span {
+    color: $white;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+}
+
 p { 
     color: $white;
     text-align: center;
@@ -83,3 +91,51 @@ p {
         }
     }
 }
+
+.mobile {
+    display: none;
+}
+
+@media (max-width: 390px) {
+    main {
+        > form {
+            flex-direction: column;
+            max-width: 91.8vw;
+            width: 100%;
+        }
+
+        > div:first-child {
+            max-width: 91.8vw;
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    ::ng-deep mat-form-field {
+        width: 100%;
+        > div:first-child {
+            width: 100%;
+        }
+    }
+
+    button.filled {
+        width: max-content;
+        align-self: center;
+    }
+
+    ::ng-deep mat-form-field input::placeholder {
+        font-size: 1rem;
+    }
+}
+
