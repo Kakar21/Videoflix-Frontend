@@ -1,7 +1,6 @@
 import { MatButtonModule } from '@angular/material/button';
-import { Video } from '../../models/video';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { VideoCollection } from '../../models/video-collection';
 import { VideoService } from '../../services/video.service';
 import { VideoData } from '../../models/video-data';
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './video-list.component.html',
   styleUrl: './video-list.component.scss'
 })
-export class VideoListComponent implements OnInit, OnDestroy {
+export class VideoListComponent implements OnInit {
   cs = inject(VideoService);
   videoCollections: VideoCollection[] = [];
   selectedVideoId: number = 0;
@@ -30,39 +29,15 @@ export class VideoListComponent implements OnInit, OnDestroy {
       videoDetail.style.setProperty('--bg-image', `url(${video.thumbnail})`);
     }
 
-    if (window.matchMedia('(max-width: 390px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.playVideo(video);
     }
-
-    // this.scrollToPreview();
   }
 
   ngOnInit() {
     this.loadContent();
-    // this.adjustScrollDistance();
-    // window.addEventListener('resize', this.adjustScrollDistance.bind(this));
   }
 
-  ngOnDestroy() {
-    // window.removeEventListener('resize', this.adjustScrollDistance.bind(this));
-  }
-
-
-  // /**
-  //  * Adjusts scroll distance based on screen width.
-  //  */
-  // adjustScrollDistance() {
-  //   const width = window.innerWidth;
-  //   if (width < 500) {
-  //     this.scrollDistance = 240;
-  //   } else if (width < 900) {
-  //     this.scrollDistance = 360;
-  //   } else if (width < 1275) {
-  //     this.scrollDistance = 480;
-  //   } else {
-  //     this.scrollDistance = 720;
-  //   }
-  // }
 
   /**
    * Fetches video content from the backend.

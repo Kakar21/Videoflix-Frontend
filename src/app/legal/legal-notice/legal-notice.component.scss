@@ -9,6 +9,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    max-width: 1680px;
+    margin: 0 auto;
 }
 
 
@@ -27,7 +29,7 @@ h2 {
 }
 
 
-@media (max-width: 390px) {
+@media (max-width: 768px) {
     ::ng-deep .videoflix {
         content: url('../../../assets/images/logos/videoflix.svg') !important;
     }

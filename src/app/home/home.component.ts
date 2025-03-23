@@ -16,4 +16,9 @@ export class HomeComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(public router: Router) { }
+
+  navigateToSignup() {
+    const email = this.emailFormControl.value;
+    this.router.navigate(['/signup'], { state: { email: email } });
+  }
 }

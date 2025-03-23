@@ -140,9 +140,8 @@ div.error {
     }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 600px) {
     form {
-        width: calc(22.375rem - 1.5rem - 1.5rem);
         padding: 2.6875rem 1.5rem;
         gap: 1.5rem;
     }
@@ -159,7 +158,24 @@ div.error {
         margin-bottom: 0.5rem;
     }
 
-    ::ng-deep .email-field input::placeholder, ::ng-deep .password-field input::placeholder {
+    ::ng-deep .email-field input, ::ng-deep .password-field input {
         font-size: 1rem !important;
+        &::placeholder {
+            font-size: 1rem !important;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    form {
+        width: calc(22.375rem - 1.5rem - 1.5rem);
+    }
+}
+
+@media (max-width: 360px) {
+    .links-buttons {
+        >div {
+            gap: 1rem;
+        }
     }
 }

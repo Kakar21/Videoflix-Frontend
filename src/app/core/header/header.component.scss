@@ -6,6 +6,8 @@ main {
     align-items: center;
     padding: 0.625rem 6rem;
     height: calc(6.75rem - 0.625rem - 0.625rem);
+    max-width: 1680px;
+    margin: 0 auto;
 }
 
 main::before {
@@ -52,7 +54,13 @@ main.scrolled::before {
     gap: 0.25rem;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 1024px) {
+    main {
+        padding: 0.625rem 3rem;
+    }
+}
+
+@media (max-width: 768px) {
     .videoflix {
         content: url('../../../assets/images/logos/symbol.svg');
     }

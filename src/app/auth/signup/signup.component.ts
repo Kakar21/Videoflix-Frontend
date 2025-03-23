@@ -22,9 +22,14 @@ export class SignupComponent {
   hide = signal(true);
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    // Abrufen der E-Mail-Adresse aus dem Navigationsstatus, falls vorhanden
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { email?: string; };
+    const email = state?.email || '';
+
     this.signUpForm = this.fb.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        email: [email, [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       },

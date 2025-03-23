@@ -68,7 +68,7 @@ main:has(vg-controls:not(.hide)) .overlay {
     top: 0;
     left: 0;
     right: 0;
-    height: 6.75rem;
+    height: calc(6.75rem - 0.625rem - 0.625rem);
     padding: 0.625rem 2rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.00) 100%);
     z-index: 300;
@@ -98,4 +98,110 @@ main:has(vg-controls:not(.hide)) .overlay {
     z-index: 300;
     pointer-events: all;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%);
+}
+
+@media (max-width: 896px) {
+    .overlay-top {
+        padding: 0.625rem 1rem;
+        height: calc(5rem - 0.625rem - 0.625rem);
+        flex-direction: row-reverse;
+        justify-content: unset;
+
+        >img {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        img:first-child {
+            content: url("../../../assets/images/icons/close_small.svg");
+            margin-left: auto;
+        }
+
+        img:last-child {
+            margin-right: 0.75rem;
+        }
+    }
+
+    vg-controls {
+        padding: 0rem 1rem 0.5rem 1rem;
+        width: calc(100% - 2rem);
+        font-size: 1.5rem;
+        height: unset;
+        align-items: center;
+    }
+    
+    ::ng-deep .vg-icon-play_arrow:before {
+        font-size: 3.5rem;
+    }
+
+    vg-mute, vg-volume {
+        display: none;
+    }
+    
+    select, vg-fullscreen {
+        font-size: 1rem;
+        height: unset !important;
+    }
+
+    vg-scrub-bar {
+        height: 0.5rem !important;
+        display: flex;
+        align-items: center;
+
+        .scrubBar {
+            height: unset !important;
+        }
+    }
+    
+    vg-time-display {
+        font-size: 1rem !important;
+        height: unset !important;
+        display: flex;
+        align-items: center;
+        line-height: unset !important;
+
+        > span {
+            line-height: unset !important;
+            height: unset !important;
+            vertical-align: middle;
+        }
+    }
+
+    ::ng-deep .icon.vg-icon-play_arrow {
+        width: 2rem;
+        height: 2rem;
+
+        &::before {
+            font-size: 2rem;
+        }
+    }
+
+    vg-play-pause {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    ::ng-deep [class*=" vg-icon-"],
+[class^=vg-icon-] {
+    font-size: 2rem;
+}
+
+    vg-fullscreen { 
+        width: 2rem;
+        height: 2rem;
+
+        > div {
+            font-size: 2rem;
+
+            &::before {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+    }
 }
