@@ -118,7 +118,7 @@ main:has(vg-controls:not(.hide)) .overlay {
         }
 
         img:first-child {
-            content: url("../../../assets/images/icons/close_small.svg");
+            content: url("../../../assets/icons/close_small.svg");
             margin-left: auto;
         }
 
@@ -134,16 +134,18 @@ main:has(vg-controls:not(.hide)) .overlay {
         height: unset;
         align-items: center;
     }
-    
+
     ::ng-deep .vg-icon-play_arrow:before {
         font-size: 3.5rem;
     }
 
-    vg-mute, vg-volume {
+    vg-mute,
+    vg-volume {
         display: none;
     }
-    
-    select, vg-fullscreen {
+
+    select,
+    vg-fullscreen {
         font-size: 1rem;
         height: unset !important;
     }
@@ -157,7 +159,7 @@ main:has(vg-controls:not(.hide)) .overlay {
             height: unset !important;
         }
     }
-    
+
     vg-time-display {
         font-size: 1rem !important;
         height: unset !important;
@@ -165,7 +167,7 @@ main:has(vg-controls:not(.hide)) .overlay {
         align-items: center;
         line-height: unset !important;
 
-        > span {
+        >span {
             line-height: unset !important;
             height: unset !important;
             vertical-align: middle;
@@ -187,15 +189,15 @@ main:has(vg-controls:not(.hide)) .overlay {
     }
 
     ::ng-deep [class*=" vg-icon-"],
-[class^=vg-icon-] {
-    font-size: 2rem;
-}
+    [class^=vg-icon-] {
+        font-size: 2rem;
+    }
 
-    vg-fullscreen { 
+    vg-fullscreen {
         width: 2rem;
         height: 2rem;
 
-        > div {
+        >div {
             font-size: 2rem;
 
             &::before {

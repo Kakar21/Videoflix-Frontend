@@ -48,6 +48,20 @@ export class LoginComponent {
     }
   }
 
+  async guestLogin() {
+    try {
+      const response = await this.authService.login('guest@guest.guest', 'guest');
+      localStorage.setItem('authToken', response.access_token);
+      this.router.navigate(['/videos']);
+    } catch (error: any) {
+      if (error.error?.detail) {
+        this.errorMessage = error.error.detail;
+      } else {
+        this.errorMessage = 'Guest login failed. Please try again later.';
+      }
+    }
+  }
+
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();

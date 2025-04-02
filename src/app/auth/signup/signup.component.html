@@ -1,54 +1,45 @@
 <main>
-    <form (ngSubmit)="signup()" [formGroup]="signUpForm">
-        <h1>Sign Up</h1>
-        <mat-form-field class="email-field">
-          <input type="email" formControlName="email" matInput placeholder="Email Address">
-          @if (signUpForm.get('email')?.hasError('required')) {
-            <mat-error>Email is <strong>required</strong></mat-error>
-          } @else if (signUpForm.get('email')?.hasError('email')) {
-            <mat-error>Please enter a valid email address</mat-error>
-          } @else if (signUpForm.get('email')?.hasError('emailAlreadyRegistered')) {
-            <mat-error>Email already registered</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field class="password-field">
-            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Enter a password" formControlName="password" />
-            <button
-              type="button"
-              mat-icon-button
-              matSuffix
-              (click)="clickEvent($event)"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide()"
-            >
-            <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
-            </button>
-            @if (signUpForm.get('password')?.hasError('required')) {
-              <mat-error>Password is <strong>required</strong></mat-error>
-            }
-          </mat-form-field>
-          <mat-form-field class="password-field">
-            <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirm password" formControlName="confirmPassword" />
-            <button
-              type="button"
-              mat-icon-button
-              matSuffix
-              (click)="clickEvent($event)"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide()"
-            >
-            <img [src]="hide() ? 'assets/images/icons/visibility_off.svg' : 'assets/images/icons/visibility.svg'" alt="Toggle password visibility">
-            </button>
-            @if (signUpForm.get('confirmPassword')?.hasError('required')) {
-              <mat-error>Confirm password is <strong>required</strong></mat-error>
-            } @else if (signUpForm.hasError('passwordsMismatch')) {
-              <mat-error>Passwords do not match</mat-error>
-            }
-          </mat-form-field>
-          <div *ngIf="errorMessage" class="error">
-            <img src="assets/images/icons/warning.svg" alt="">
-            {{ errorMessage }}
-          </div>
-        <button [disabled]="signUpForm.invalid" type="submit" mat-flat-button class="filled">Get Started</button>
-    </form>
+  <form (ngSubmit)="signup()" [formGroup]="signUpForm">
+    <h1>Sign Up</h1>
+    <mat-form-field class="email-field">
+      <input type="email" formControlName="email" matInput placeholder="Email Address">
+      @if (signUpForm.get('email')?.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+      } @else if (signUpForm.get('email')?.hasError('email')) {
+      <mat-error>Please enter a valid email address</mat-error>
+      } @else if (signUpForm.get('email')?.hasError('emailAlreadyRegistered')) {
+      <mat-error>Email already registered</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="password-field">
+      <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Enter a password" formControlName="password" />
+      <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()">
+        <img [src]="hide() ? 'assets/icons/visibility_off.svg' : 'assets/icons/visibility.svg'"
+          alt="Toggle password visibility">
+      </button>
+      @if (signUpForm.get('password')?.hasError('required')) {
+      <mat-error>Password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="password-field">
+      <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirm password"
+        formControlName="confirmPassword" />
+      <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()">
+        <img [src]="hide() ? 'assets/icons/visibility_off.svg' : 'assets/icons/visibility.svg'"
+          alt="Toggle password visibility">
+      </button>
+      @if (signUpForm.get('confirmPassword')?.hasError('required')) {
+      <mat-error>Confirm password is <strong>required</strong></mat-error>
+      } @else if (signUpForm.hasError('passwordsMismatch')) {
+      <mat-error>Passwords do not match</mat-error>
+      }
+    </mat-form-field>
+    <div *ngIf="errorMessage" class="error">
+      <img src="assets/icons/warning.svg" alt="">
+      {{ errorMessage }}
+    </div>
+    <button [disabled]="signUpForm.invalid" type="submit" mat-flat-button class="filled">Get Started</button>
+  </form>
 </main>

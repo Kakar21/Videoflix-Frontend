@@ -3,31 +3,52 @@
         <div>
             <h1>{{ cs.currentVideo.title }}</h1>
             <p>{{ cs.currentVideo.description }}</p>
-            <button (click)="playVideo(cs.currentVideo)" mat-flat-button class="filled"><img src="assets/images/icons/play_arrow.svg">Play</button>
+            <button (click)="playVideo(cs.currentVideo)" mat-flat-button class="filled"><img
+                    src="assets/icons/play_arrow.svg">Play</button>
         </div>
     </div>
 
     <div class="video-list">
-@if ((getNewVideos().length > 0)) {
-    <div>
-        <h2>New on Videoflix</h2>
+        @if ((getNewVideos().length > 0)) {
         <div>
-            <img *ngFor="let video of getNewVideos()" (click)="selectVideo(video)" [src]="video.thumbnail" alt="{{video.title}}">
-        </div>
-    </div>
-}
-@for (category of videoCollections; track $index) { 
-    @if (category.videos.length > 0) {
-        <div>
-            <h2>{{category.categoryName}}</h2>
-            <div>
-                @for (video of category.videos; track $index) {
-                    <img (click)="selectVideo(video)" [src]="video.thumbnail" alt="{{video.title}}">
-                }
+            <h2>New on Videoflix</h2>
+            <div class="slider-container">
+                <button *ngIf="getNewVideos().length > getVisibleItemCount() && canScrollLeft('new')"
+                    class="btn-nav left" (click)="scrollLeft('new')">
+                    <img src="assets/icons/chevron_left.svg" alt="chevron-left">
+                </button>
+                <div class="slider-track">
+                    <img *ngFor="let video of getNewVideos()" (click)="selectVideo(video)" [src]="video.thumbnail"
+                        alt="{{video.title}}">
+                </div>
+                <button *ngIf="getNewVideos().length > getVisibleItemCount()" class="btn-nav right"
+                    (click)="scrollRight('new')">
+                    <img src="assets/icons/chevron_right.svg" alt="chevron-right">
+                </button>
             </div>
         </div>
-    }
-}
-<!-- TODO: add feedback effects and check everywhere -->
+        }
+        @for (category of videoCollections; track $index) {
+        @if (category.videos.length > 0) {
+        <div>
+            <h2>{{category.categoryName}}</h2>
+            <div class="slider-container">
+                <button *ngIf="category.videos.length > getVisibleItemCount() && canScrollLeft(category.categoryName)"
+                    class="btn-nav left" (click)="scrollLeft(category.categoryName)">
+                    <img src="assets/icons/chevron_left.svg" alt="chevron-left">
+                </button>
+                <div class="slider-track">
+                    @for (video of category.videos; track $index) {
+                    <img (click)="selectVideo(video)" [src]="video.thumbnail" alt="{{video.title}}">
+                    }
+                </div>
+                <button *ngIf="category.videos.length > getVisibleItemCount()" class="btn-nav right"
+                    (click)="scrollRight(category.categoryName)">
+                    <img src="assets/icons/chevron_right.svg" alt="chevron-right">
+                </button>
+            </div>
+        </div>
+        }
+        }
     </div>
 </main>
