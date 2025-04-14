@@ -18,6 +18,7 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   selectedVideoId: number = 0;
   scrollDistance: number = 720;
   baseUrl = 'http://127.0.0.1:8000';
+  // baseUrl = 'https://videoflix-backend.kakar.dev';
   sliderPositions: { [key: string]: number; } = {};
   visibleItemCount: number = 6;
   itemWidth: number = 0;
