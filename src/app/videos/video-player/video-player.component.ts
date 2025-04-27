@@ -40,6 +40,7 @@ export class VideoPlayerComponent implements OnInit {
   progress: number = 0;
   lastPosition: number = 0;
   isMetadataLoaded: boolean = false; // Flag für geladenes Video
+  isPlaying: boolean = false;
 
   selectedQuality: keyof Pick<VideoData, 'video_120p' | 'video_360p' | 'video_720p' | 'video_1080p'> = 'video_720p';
   constructor(private route: ActivatedRoute, public videoService: VideoService, private router: Router) { }
@@ -61,7 +62,6 @@ export class VideoPlayerComponent implements OnInit {
           const ongoingVideo = ongoingVideos.find((v: any) => v.video.id === Number(id));
           if (ongoingVideo) {
             this.lastPosition = ongoingVideo.last_position;
-            console.log(`Setze letzte Position auf: ${this.lastPosition}`);
           }
 
           // 🛠 Jetzt erst Video starten
@@ -78,30 +78,39 @@ export class VideoPlayerComponent implements OnInit {
     if (this.videoElement && this.videoElement.nativeElement && this.currentVideo) {
       this.videoElement.nativeElement.src = this.currentVideo[this.selectedQuality] as string;
       this.videoElement.nativeElement.load();
-  
+
       // 🛑 Neu hinzugefügt: Flag zurücksetzen, weil wir das Video neu laden
       this.isMetadataLoaded = false;
-  
+
       // ✅ Erst wenn das Video geladen ist, setzen wir die Position!
       this.videoElement.nativeElement.onloadedmetadata = () => {
-        console.log('✅ Metadata loaded. Setting last position...');
-  
         this.isMetadataLoaded = true;
-  
+
         // **NEU: 100ms Delay für sicheres Laden**
         setTimeout(() => {
           if (this.lastPosition > 0) {
-            console.log(`⏩ Setze Video-Progress auf ${this.lastPosition} Sekunden.`);
             this.setVideoProgress();
           }
+          // Video automatisch starten
+          this.videoElement.nativeElement.play()
+            .then(() => {
+              this.isPlaying = true;
+              // Nach erfolgreicher Wiedergabe Stummschaltung aufheben
+              setTimeout(() => {
+                this.videoElement.nativeElement.muted = false;
+              }, 500);
+            })
+            .catch(error => {
+              console.warn('Autoplay wurde verhindert:', error);
+            });
         }, 100);
       };
-  
+
       // 🛑 Neu hinzugefügt: Fortschritt alle 5 Sekunden speichern
       this.videoElement.nativeElement.ontimeupdate = () => {
         if (this.videoElement.nativeElement.duration) {
           this.progress = (this.videoElement.nativeElement.currentTime / this.videoElement.nativeElement.duration) * 100;
-          
+
           if (Math.floor(this.videoElement.nativeElement.currentTime) % 5 === 0) {
             this.saveProgress();
           }
@@ -109,12 +118,11 @@ export class VideoPlayerComponent implements OnInit {
       };
     }
   }
-  
+
 
 
   setVideoProgress() {
     if (this.videoElement && this.videoElement.nativeElement && this.isMetadataLoaded) {
-      console.log(`Setze Video-Progress auf ${this.lastPosition} Sekunden`);
       this.videoElement.nativeElement.currentTime = this.lastPosition;
     }
   }

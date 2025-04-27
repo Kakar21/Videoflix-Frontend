@@ -259,10 +259,10 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   private getCategoryMappings() {
     return {
       'new': 'New on Videoflix',
-      'documentary': 'Documentary',
-      'drama': 'Drama',
-      'romance': 'Romance',
-      'started': 'Ongoing Videos'
+      'sci-fi': 'Sci-Fi',
+      'fantasy': 'Fantasy',
+      'comedy': 'Comedy',
+      'started': 'Continue Watching'
     };
   }
 

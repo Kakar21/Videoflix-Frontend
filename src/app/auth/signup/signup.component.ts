@@ -50,7 +50,6 @@ export class SignupComponent {
       this.authService
         .register(email, password)
         .then((response) => {
-          console.log(response);
           this.router.navigate(['/login']);
         })
         .catch((error) => {

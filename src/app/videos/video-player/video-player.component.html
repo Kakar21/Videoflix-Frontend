@@ -1,6 +1,6 @@
 <main>
   <vg-player>
-    <video #media id="singleVideo" [vgMedia]="$any(media)" preload="auto" crossorigin>
+    <video #media id="singleVideo" [vgMedia]="$any(media)" preload="auto" crossorigin autoplay muted>
       <source [src]="currentVideo[selectedQuality]" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
@@ -22,12 +22,14 @@
       <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
       <vg-mute></vg-mute>
       <vg-volume></vg-volume>
-      <select (change)="changeQuality($event)">
-        <option value="video_120p">120p</option>
-        <option value="video_360p">360p</option>
-        <option value="video_720p" selected>720p</option>
-        <option value="video_1080p">1080p</option>
-      </select>
+      <div class="quality-selector">
+        <select (change)="changeQuality($event)">
+          <option value="video_120p">120p</option>
+          <option value="video_360p">360p</option>
+          <option value="video_720p" selected>720p</option>
+          <option value="video_1080p">1080p</option>
+        </select>
+      </div>
       <vg-fullscreen></vg-fullscreen>
     </vg-controls>
   </vg-player>

@@ -41,6 +41,46 @@ vg-overlay-play {
     bottom: 0;
 }
 
+// Custom styling for the quality selector
+.quality-selector {
+    display: flex;
+    align-items: center;
+}
+
+select {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 2.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.25rem;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='6'><path d='M0 0 L6 6 L12 0' fill='none' stroke='white' stroke-width='1.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 1.65rem;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgba(58, 58, 58, 0.8);
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    option {
+        background-color: #141414;
+        color: white;
+    }
+}
+
 .overlay {
     width: 100%;
     height: 100%;
@@ -205,5 +245,13 @@ main:has(vg-controls:not(.hide)) .overlay {
                 height: 2rem;
             }
         }
+    }
+
+    // Mobile-specific quality selector styles
+    select {
+        font-size: 0.875rem;
+        padding: 0.3rem 0.5rem;
+        padding-right: 1.25rem;
+        background-position: right 5px center;
     }
 }
